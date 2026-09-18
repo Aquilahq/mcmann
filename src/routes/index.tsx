@@ -49,7 +49,28 @@ function Home() {
   const [filter, setFilter] = useState<string>("All");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const shown = credits.filter((c) => filter === "All" || c.department === filter);
+
+  useEffect(() => {
+    const sections = nav
+      .map(({ href }) => document.getElementById(href.slice(1)))
+      .filter((section): section is HTMLElement => Boolean(section));
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-18% 0px -62% 0px", threshold: [0.05, 0.25, 0.5] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (selectedImage === null) return;
@@ -93,17 +114,21 @@ function Home() {
               </button>
             </div>
           </div>
-          <nav className={`${mobileNavOpen ? "grid" : "hidden"} mt-5 grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:pt-0 xl:text-[11px]`}>
-            {nav.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                onClick={() => setMobileNavOpen(false)}
-                className="transition-colors hover:text-gold"
-              >
-                {n.label}
-              </a>
-            ))}
+          <nav className={`${mobileNavOpen ? "grid sticky top-0 z-40 bg-ink/95 backdrop-blur-md" : "hidden"} mt-5 grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:bg-transparent xl:pt-0 xl:backdrop-blur-none xl:static xl:text-[11px]`}>
+            {nav.map((n) => {
+              const sectionId = n.href.slice(1);
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  aria-current={isActive ? "location" : undefined}
+                  className={`rounded px-1 py-2 transition-colors hover:text-gold ${isActive ? "bg-gold/15 text-gold" : ""}`}
+                >
+                  {n.label}
+                </a>
+              );
+            })}
           </nav>
 
           <div className="mt-10 grid items-end gap-10 md:grid-cols-12">
@@ -207,7 +232,7 @@ function Home() {
       </section>
 
       {/* BIOGRAPHY */}
-      <section id="biography" className="bg-panel">
+      <section id="biography" className="scroll-mt-16 bg-panel">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <div className="grid gap-10 md:grid-cols-12">
             <div className="md:col-span-4">
@@ -250,7 +275,7 @@ function Home() {
       </section>
 
       {/* CREDITS */}
-      <section id="credits" className="border-y border-line bg-ink">
+      <section id="credits" className="scroll-mt-16 border-y border-line bg-ink">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -326,7 +351,7 @@ function Home() {
       </section>
 
       {/* VOICE */}
-      <section id="voice" className="bg-panel2">
+      <section id="voice" className="scroll-mt-16 bg-panel2">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <div className="mb-10">
             <p className="slate-label">Slate 04 · Audio Bay</p>
@@ -374,7 +399,7 @@ function Home() {
       </section>
 
       {/* STILLS */}
-      <section id="stills" className="border-y border-line bg-ink">
+      <section id="stills" className="scroll-mt-16 border-y border-line bg-ink">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -464,7 +489,7 @@ function Home() {
       )}
 
       {/* BOOKING */}
-      <section id="booking" className="bg-panel">
+      <section id="booking" className="scroll-mt-16 bg-panel">
         <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
           <div className="grid gap-10 md:grid-cols-12">
             <div className="md:col-span-5">
