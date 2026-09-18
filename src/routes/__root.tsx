@@ -77,14 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AQUILA" },
-      { name: "description", content: "AQUILA creative portfolio" },
-      { name: "author", content: "AQUILA" },
-      { property: "og:title", content: "AQUILA" },
-      { property: "og:description", content: "AQUILA creative portfolio" },
-      { property: "og:type", content: "website" },
+      { title: "James McMann — Actor, Voice-Over Artist, Writer & Producer" },
+      { name: "description", content: "Official portfolio of James R. McMann, character actor, voice-over artist, writer and producer with 100+ television and film credits." },
+      { name: "author", content: "James R. McMann" },
+      { name: "keywords", content: "James McMann, actor, character actor, voice-over artist, writer, producer, casting, film, television" },
+      { property: "og:title", content: "James McMann — Actor, Voice-Over Artist, Writer & Producer" },
+      { property: "og:description", content: "Character actor, voice-over artist, writer and producer with 100+ television and film credits." },
+      { property: "og:type", content: "profile" },
+      { property: "og:image", content: "https://mcmann.aquilaconsulting.workers.dev/james-mcmann-og.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@AQUILA" },
+      { name: "twitter:image", content: "https://mcmann.aquilaconsulting.workers.dev/james-mcmann-og.jpg" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -111,6 +114,21 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "James R. McMann",
+              alternateName: "Jim McMann",
+              jobTitle: ["Actor", "Voice-Over Artist", "Writer", "Producer"],
+              url: "https://mcmann.aquilaconsulting.workers.dev/",
+              image: "https://mcmann.aquilaconsulting.workers.dev/james-mcmann-og.jpg",
+              sameAs: ["https://www.imdb.com/name/nm2282094/", "https://pro.imdb.com/name/nm2282094/"],
+            }),
+          }}
+        />
       </head>
       <body>
         {children}

@@ -486,6 +486,15 @@ function Home() {
               >
                 VIEW CONTACT INFO ON IMDBPRO →
               </a>
+              <a
+                href="/james-mcmann-resume.pdf"
+                download
+                className="mt-3 block font-mono text-[11px] tracking-[0.2em] text-muted-ink hover:text-gold"
+              >
+                DOWNLOAD RESUME PDF ↓
+              </a>
+              <p className="mt-8 font-serif text-2xl italic text-gold/90">James R. McMann</p>
+              <p className="mt-1 font-mono text-[10px] tracking-[0.2em] text-muted-ink">AVAILABLE FOR THE NEXT TAKE</p>
             </div>
             <form
               className="flex flex-col gap-3 md:col-span-7"
