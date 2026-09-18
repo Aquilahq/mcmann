@@ -50,6 +50,7 @@ function Home() {
   const [filter, setFilter] = useState<string>("All");
   const [sortBy, setSortBy] = useState<"production" | "type" | "year">("year");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [headshotOpen, setHeadshotOpen] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const mobileNavTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -93,10 +94,13 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (selectedImage === null) return;
+    if (selectedImage === null && !headshotOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedImage(null);
+      if (event.key === "Escape") {
+        setSelectedImage(null);
+        setHeadshotOpen(false);
+      }
       if (event.key === "ArrowLeft") {
         setSelectedImage((current) => (current === null ? null : (current + gallery.length - 1) % gallery.length));
       }
@@ -111,7 +115,7 @@ function Home() {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [selectedImage]);
+  }, [selectedImage, headshotOpen]);
 
   return (
     <main id="top" className="bg-ink text-bone">
@@ -167,7 +171,16 @@ function Home() {
                 JAMES MCMANN
               </h1>
               <div className="mt-8 md:hidden">
-                <div className="headshot-image-frame mx-auto w-full max-w-sm">
+                <div
+                  className="headshot-image-frame mx-auto w-full max-w-sm cursor-zoom-in"
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Enlarge James McMann headshot"
+                  onClick={() => setHeadshotOpen(true)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") setHeadshotOpen(true);
+                  }}
+                >
                   <img
                     src={headshot}
                     alt="Headshot of actor and voice-over artist James McMann"
@@ -230,7 +243,16 @@ function Home() {
                 <div className="absolute -top-3 -left-1 font-mono text-[10px] tracking-[0.25em] text-gold/70">
                   FRAME 001
                 </div>
-                <div className="headshot-image-frame">
+                <div
+                  className="headshot-image-frame cursor-zoom-in"
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Enlarge James McMann headshot"
+                  onClick={() => setHeadshotOpen(true)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") setHeadshotOpen(true);
+                  }}
+                >
                   <img
                     src={headshot}
                     alt="Headshot of actor and voice-over artist James McMann"
@@ -560,6 +582,37 @@ function Home() {
           >
             ›
           </button>
+        </div>
+      )}
+
+      {headshotOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/95 p-4 md:p-10"
+          role="dialog"
+          aria-modal="true"
+          aria-label="James McMann headshot viewer"
+          onClick={() => setHeadshotOpen(false)}
+        >
+          <button
+            type="button"
+            className="absolute right-5 top-5 z-10 grid size-10 place-items-center rounded-full border border-line text-2xl text-bone transition-colors hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            onClick={() => setHeadshotOpen(false)}
+            aria-label="Close headshot viewer"
+          >
+            ×
+          </button>
+          <figure className="relative flex max-h-full max-w-full flex-col items-center" onClick={(event) => event.stopPropagation()}>
+            <img
+              src={headshot}
+              alt="Headshot of actor and voice-over artist James McMann"
+              className="max-h-[82vh] max-w-[88vw] rounded-lg object-contain shadow-2xl"
+              width={960}
+              height={1200}
+            />
+            <figcaption className="mt-4 font-mono text-[11px] tracking-[0.18em] text-muted-ink">
+              JAMES R. MCMANN · HEADSHOT
+            </figcaption>
+          </figure>
         </div>
       )}
 
