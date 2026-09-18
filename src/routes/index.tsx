@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import headshot from "@/assets/headshot.jpg";
 import p1 from "@/assets/p1.jpg";
@@ -46,7 +46,29 @@ const nav = [
 
 function Home() {
   const [filter, setFilter] = useState<string>("All");
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const shown = credits.filter((c) => filter === "All" || c.department === filter);
+
+  useEffect(() => {
+    if (selectedImage === null) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedImage(null);
+      if (event.key === "ArrowLeft") {
+        setSelectedImage((current) => (current === null ? null : (current + gallery.length - 1) % gallery.length));
+      }
+      if (event.key === "ArrowRight") {
+        setSelectedImage((current) => (current === null ? null : (current + 1) % gallery.length));
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedImage]);
 
   return (
     <main className="bg-ink text-bone">
@@ -313,18 +335,79 @@ function Home() {
           </div>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {gallery.map((img, i) => (
-              <figure key={img} className="overflow-hidden rounded-xl ring-1 ring-line">
-                <img
-                  src={img}
-                  alt={`James McMann production still ${i + 1}`}
-                  loading="lazy"
-                  className="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-105"
-                />
+              <figure key={img} className="group overflow-hidden rounded-xl ring-1 ring-line">
+                <button
+                  type="button"
+                  className="relative block w-full cursor-zoom-in text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-inset"
+                  onClick={() => setSelectedImage(i)}
+                  aria-label={`View production still ${i + 1} full size`}
+                >
+                  <img
+                    src={img}
+                    alt={`James McMann production still ${i + 1}`}
+                    loading="lazy"
+                    className="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent px-3 pb-3 pt-8 font-mono text-[10px] tracking-[0.15em] text-bone opacity-0 transition-opacity group-hover:opacity-100">
+                    VIEW FRAME {String(i + 1).padStart(2, "0")}
+                  </span>
+                </button>
               </figure>
             ))}
           </div>
         </div>
       </section>
+
+      {selectedImage !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/95 p-4 md:p-10"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Production still ${selectedImage + 1} of ${gallery.length}`}
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            className="absolute right-5 top-5 z-10 grid size-10 place-items-center rounded-full border border-line text-2xl text-bone transition-colors hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close image viewer"
+          >
+            ×
+          </button>
+          <button
+            type="button"
+            className="absolute left-4 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-line text-2xl text-bone transition-colors hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:left-8"
+            onClick={(event) => {
+              event.stopPropagation();
+              setSelectedImage((selectedImage + gallery.length - 1) % gallery.length);
+            }}
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+          <figure className="relative flex max-h-full max-w-full flex-col items-center" onClick={(event) => event.stopPropagation()}>
+            <img
+              src={gallery[selectedImage]}
+              alt={`James McMann production still ${selectedImage + 1}`}
+              className="max-h-[82vh] max-w-[88vw] rounded-lg object-contain shadow-2xl"
+            />
+            <figcaption className="mt-4 font-mono text-[11px] tracking-[0.18em] text-muted-ink">
+              FRAME {String(selectedImage + 1).padStart(2, "0")} · {selectedImage + 1} / {gallery.length}
+            </figcaption>
+          </figure>
+          <button
+            type="button"
+            className="absolute right-4 top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-line text-2xl text-bone transition-colors hover:border-gold hover:text-gold focus:outline-none focus-visible:ring-2 focus-visible:ring-gold md:right-8"
+            onClick={(event) => {
+              event.stopPropagation();
+              setSelectedImage((selectedImage + 1) % gallery.length);
+            }}
+            aria-label="Next image"
+          >
+            ›
+          </button>
+        </div>
+      )}
 
       {/* BOOKING */}
       <section id="booking" className="bg-panel">
