@@ -73,11 +73,12 @@ function Home() {
   return (
     <main className="bg-ink text-bone">
       {/* HERO */}
-      <section className="border-b border-line">
-        <div className="mx-auto max-w-7xl px-6 pt-6 pb-14 md:px-10">
+      <section className="relative overflow-hidden border-b border-line bg-[radial-gradient(circle_at_78%_24%,rgba(211,174,101,0.12),transparent_30%),radial-gradient(circle_at_12%_80%,rgba(255,255,255,0.03),transparent_28%)]">
+        <div className="pointer-events-none absolute -right-32 top-24 size-80 rounded-full bg-gold/5 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-6 pt-6 pb-14 md:px-10">
           <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-muted-ink">
             <span>James R. McMann</span>
-            <nav className="hidden gap-6 md:flex">
+            <nav className="grid w-full grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] md:flex md:w-auto md:gap-6 md:border-0 md:pt-0 md:text-[11px]">
               {nav.map((n) => (
                 <a key={n.href} href={n.href} className="transition-colors hover:text-gold">
                   {n.label}
@@ -101,7 +102,7 @@ function Home() {
               <div className="mt-9 flex flex-wrap items-center gap-6">
                 <a
                   href="#credits"
-                  className="inline-flex items-center gap-3 rounded-lg bg-gold px-5 py-3 text-sm font-medium text-ink ring-1 ring-gold transition-transform hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-3 rounded-lg bg-gold px-5 py-3 text-sm font-medium text-ink shadow-[0_10px_30px_rgba(211,174,101,0.18)] ring-1 ring-gold transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(211,174,101,0.28)]"
                 >
                   <span className="inline-block size-2.5 rounded-full bg-ink" />
                   View Credits
