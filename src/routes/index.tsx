@@ -94,7 +94,7 @@ function Home() {
   }, [selectedImage]);
 
   return (
-    <main className="bg-ink text-bone">
+    <main id="top" className="bg-ink text-bone">
       {/* HERO */}
       <section className="hero-atmosphere relative overflow-hidden border-b border-line">
         <div className="pointer-events-none absolute -right-32 top-24 size-80 rounded-full bg-gold/5 blur-3xl" />
@@ -566,6 +566,9 @@ function Home() {
           </a>
           <span>TC 02:14:30:12</span>
           <span className="text-gold">DESIGN BY AQUILA</span>
+          <a href="#top" className="text-gold transition-colors hover:text-bone">
+            BACK TO TOP ↑
+          </a>
         </div>
       </footer>
     </main>
