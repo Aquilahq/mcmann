@@ -493,12 +493,9 @@ function Home() {
               >
                 DOWNLOAD RESUME PDF ↓
               </a>
-              <div className="signature-mark mt-8" role="img" aria-label="James R. McMann signature">
-                <svg viewBox="0 0 240 80" aria-hidden="true">
-                  <path d="M8 17C28 8 47 10 52 19c5 9-12 17-25 9-11-7-18 8-8 17 13 12 31 2 39-14 7-14 12-25 18-18 6 8-5 28 1 34 8 8 17-17 26-22 8-4 2 19 8 22 8 4 16-18 23-23 7-5 1 20 8 23 9 4 17-16 25-22 7-5 1 19 9 22 10 3 17-12 25-19" />
-                  <path d="M20 62c34-7 75-7 112-4 36 3 68 1 100-7" />
-                </svg>
-              </div>
+              <p className="mt-8 font-mono text-lg font-normal uppercase tracking-[0.18em] text-gold/90 md:text-xl">
+                James R. McMann
+              </p>
               <p className="mt-1 font-mono text-[10px] tracking-[0.2em] text-muted-ink">AVAILABLE FOR THE NEXT TAKE</p>
             </div>
             <form
