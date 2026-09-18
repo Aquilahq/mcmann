@@ -41,6 +41,7 @@ const nav = [
   { href: "#biography", label: "Biography" },
   { href: "#credits", label: "Credits" },
   { href: "#voice", label: "Voice" },
+  { href: "#skills", label: "Skills" },
   { href: "#stills", label: "Stills" },
   { href: "#booking", label: "Booking" },
 ];
@@ -407,6 +408,37 @@ function Home() {
           </div>
           <p className="mt-6 font-mono text-[11px] tracking-[0.15em] text-muted-ink">
             DEMO FILES PENDING — SEND MP3s AND THEY DROP STRAIGHT IN.
+          </p>
+        </div>
+      </section>
+
+      {/* SKILLS & TRAINING */}
+      <section id="skills" className="scroll-mt-16 border-y border-line bg-panel">
+        <div className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+          <div className="mb-10">
+            <p className="slate-label">Slate 05 · Casting Profile</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-bone md:text-4xl">
+              Skills &amp; Training
+            </h2>
+            <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-pretty text-muted-ink">
+              A practical casting snapshot spanning performance, production, movement, languages and conservatory training.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              ["Profile", "SAG-AFTRA · 6′0″ · 265 lbs · Blonde hair · Green eyes"],
+              ["Performance", "Improv · impersonation · mimicry · voice characterizations · VO / ADR / walla · baritone singing"],
+              ["Languages & Accents", "English · conversational Swahili · Southern · Scottish · New York · Jamaican · Irish · British · Australian"],
+              ["Training", "Wingate College · AFI / SAG-AFTRA Conservatory · Aspire Conservatory · Tom Logan · George Flynn · Dustin Nguyen"],
+            ].map(([label, detail]) => (
+              <div key={label} className="rounded-xl bg-ink/45 p-5 ring-1 ring-line">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">{label}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-ink">{detail}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 max-w-[70ch] font-mono text-[11px] leading-relaxed tracking-[0.08em] text-muted-ink">
+            Additional production skills: teleprompter, electronic ear, cue cards, stand-in work, photography, scuba, swimming, billiards, blackjack dealing and production-assistant training.
           </p>
         </div>
       </section>
