@@ -112,6 +112,15 @@ function Home() {
               <h1 className="mt-6 w-full max-w-full text-center text-[11vw] leading-[0.95] font-semibold tracking-[-0.03em] text-balance text-bone md:text-left md:text-7xl">
                 JAMES MCMANN
               </h1>
+              <div className="mt-8 md:hidden">
+                <img
+                  src={headshot}
+                  alt="Headshot of actor and voice-over artist James McMann"
+                  className="mx-auto w-full max-w-sm rounded-xl object-cover ring-1 ring-line"
+                  width={960}
+                  height={1200}
+                />
+              </div>
               <p className="mt-6 max-w-[50ch] text-center text-base leading-relaxed text-pretty text-muted-ink md:text-left md:text-lg">
                 Southeast Texas by way of the Kenyan Rift Valley. Behind the microphone since 1984,
                 on the mark since 2004 — over 100 television shows and features, plus a producer's
@@ -149,7 +158,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="animate-fade-up md:col-span-5">
+            <div className="animate-fade-up hidden md:col-span-5 md:block">
               <div className="relative">
                 <div className="absolute -top-3 -left-1 font-mono text-[10px] tracking-[0.25em] text-gold/70">
                   FRAME 001
