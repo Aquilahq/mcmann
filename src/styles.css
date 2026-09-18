@@ -62,29 +62,40 @@
   overflow: visible;
   fill: none;
   stroke: var(--gold);
-  stroke-width: 1.2;
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  filter: drop-shadow(0 0 4px color-mix(in oklch, var(--gold) 80%, transparent));
+  filter: drop-shadow(0 0 5px color-mix(in oklch, var(--gold) 95%, transparent));
   pointer-events: none;
 }
 
 .headshot-sweep path {
-  stroke-dasharray: 400;
+  stroke-dasharray: 42 358;
   stroke-dashoffset: 400;
+  opacity: 0;
   animation: headshot-sweep 2.2s linear 0.25s both;
 }
 
 @keyframes headshot-sweep {
-  to {
+  0% {
+    stroke-dashoffset: 400;
+    opacity: 0;
+  }
+  8%,
+  88% {
+    opacity: 1;
+  }
+  100% {
     stroke-dashoffset: 0;
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .headshot-sweep path {
     animation: none;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: 400;
+    opacity: 0;
   }
 }
 
