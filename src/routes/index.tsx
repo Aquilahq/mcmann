@@ -63,7 +63,7 @@ function Home() {
 
   const scheduleMobileNavClose = () => {
     if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
-    mobileNavTimer.current = setTimeout(() => setMobileNavOpen(false), 5000);
+    mobileNavTimer.current = setTimeout(() => setMobileNavOpen(false), 10000);
   };
 
   useEffect(() => {
@@ -71,6 +71,15 @@ function Home() {
       if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (!mobileNavOpen || !activeSection) return;
+    if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
+    mobileNavTimer.current = setTimeout(() => setMobileNavOpen(false), 10000);
+    return () => {
+      if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
+    };
+  }, [activeSection, mobileNavOpen]);
 
   useEffect(() => {
     const sections = nav
@@ -135,14 +144,6 @@ function Home() {
             </div>
           </div>
           <nav className={`${mobileNavOpen ? "fixed inset-x-0 top-0 z-50 grid bg-ink/95 px-6 py-3 shadow-lg backdrop-blur-md" : "hidden"} relative grid-cols-6 gap-1 border-t border-line pt-3 pr-14 text-center text-[10px] uppercase xl:static xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none xl:backdrop-blur-none xl:text-[11px]`}>
-            <button
-              type="button"
-              className="absolute right-6 top-3 grid size-8 place-items-center rounded text-gold transition-colors hover:bg-gold/15 xl:hidden"
-              onClick={() => setMobileNavOpen(false)}
-              aria-label="Close navigation menu"
-            >
-              <X size={18} />
-            </button>
             {nav.map((n) => {
               const sectionId = n.href.slice(1);
               const isActive = activeSection === sectionId;
