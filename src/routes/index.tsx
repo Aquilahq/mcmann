@@ -476,6 +476,7 @@ function Home() {
             IMDB
           </a>
           <span>TC 02:14:30:12</span>
+          <span className="text-gold">DESIGN BY AQUILA</span>
         </div>
       </footer>
     </main>
