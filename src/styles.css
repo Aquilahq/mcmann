@@ -11,6 +11,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --font-sans: "Space Grotesk", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-signature: "Allura", cursive;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ink: var(--ink);
