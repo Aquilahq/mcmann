@@ -48,9 +48,19 @@
 
 .hero-atmosphere {
   background:
-    radial-gradient(circle at 78% 22%, color-mix(in oklch, var(--gold) 18%, transparent), transparent 34%),
-    radial-gradient(circle at 12% 82%, color-mix(in oklch, white 6%, transparent), transparent 30%),
-    var(--ink);
+    radial-gradient(circle at 78% 22%, color-mix(in oklch, var(--gold) 28%, transparent), transparent 34%),
+    radial-gradient(circle at 12% 82%, color-mix(in oklch, white 8%, transparent), transparent 30%),
+    linear-gradient(120deg, var(--ink), color-mix(in oklch, var(--ink) 88%, var(--gold) 12%));
+}
+
+.bg-panel {
+  background-image:
+    radial-gradient(circle at 90% 10%, color-mix(in oklch, var(--gold) 10%, transparent), transparent 38%),
+    linear-gradient(135deg, color-mix(in oklch, var(--panel) 94%, var(--gold) 6%), var(--panel));
+}
+
+.bg-gold {
+  box-shadow: 0 10px 30px color-mix(in oklch, var(--gold) 22%, transparent);
 }
 
 :root {
