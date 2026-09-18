@@ -113,13 +113,15 @@ function Home() {
                 JAMES MCMANN
               </h1>
               <div className="mt-8 md:hidden">
-                <img
-                  src={headshot}
-                  alt="Headshot of actor and voice-over artist James McMann"
-                  className="mx-auto w-full max-w-sm rounded-xl object-cover ring-1 ring-line"
-                  width={960}
-                  height={1200}
-                />
+                <div className="headshot-image-frame mx-auto w-full max-w-sm">
+                  <img
+                    src={headshot}
+                    alt="Headshot of actor and voice-over artist James McMann"
+                    className="w-full rounded-xl object-cover ring-1 ring-line"
+                    width={960}
+                    height={1200}
+                  />
+                </div>
               </div>
               <p className="mt-6 max-w-[50ch] text-center text-base leading-relaxed text-pretty text-muted-ink md:text-left md:text-lg">
                 Southeast Texas by way of the Kenyan Rift Valley. Behind the microphone since 1984,
@@ -163,13 +165,15 @@ function Home() {
                 <div className="absolute -top-3 -left-1 font-mono text-[10px] tracking-[0.25em] text-gold/70">
                   FRAME 001
                 </div>
-                <img
-                  src={headshot}
-                  alt="Headshot of actor and voice-over artist James McMann"
-                  className="w-full rounded-xl object-cover ring-1 ring-line"
-                  width={960}
-                  height={1200}
-                />
+                <div className="headshot-image-frame">
+                  <img
+                    src={headshot}
+                    alt="Headshot of actor and voice-over artist James McMann"
+                    className="w-full rounded-xl object-cover ring-1 ring-line"
+                    width={960}
+                    height={1200}
+                  />
+                </div>
                 <div className="mt-3 flex justify-between font-mono text-[10px] tracking-[0.2em] text-muted-ink">
                   <span>HEADSHOT · 6′0″</span>
                   <span>A.K.A. “JIM”</span>

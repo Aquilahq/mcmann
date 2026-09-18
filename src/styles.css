@@ -46,6 +46,50 @@
   }
 }
 
+.headshot-image-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.headshot-image-frame::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  border-radius: 0.75rem;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg 282deg,
+    color-mix(in oklch, var(--gold) 20%, transparent) 300deg,
+    var(--gold) 315deg,
+    color-mix(in oklch, var(--gold) 20%, transparent) 330deg,
+    transparent 348deg 360deg
+  );
+  content: "";
+  pointer-events: none;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: headshot-sweep 1.8s cubic-bezier(0.32, 0.72, 0, 1) 0.35s both;
+}
+
+@keyframes headshot-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .headshot-image-frame::after {
+    animation: none;
+  }
+}
+
 .hero-atmosphere {
   background:
     radial-gradient(circle at 78% 22%, color-mix(in oklch, var(--gold) 28%, transparent), transparent 34%),
