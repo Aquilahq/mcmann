@@ -121,6 +121,9 @@ function Home() {
                     width={960}
                     height={1200}
                   />
+                  <svg className="headshot-sweep" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M 6 1 H 94 A 5 5 0 0 1 99 6 V 94 A 5 5 0 0 1 94 99 H 6 A 5 5 0 0 1 1 94 V 6 A 5 5 0 0 1 6 1 Z" />
+                  </svg>
                 </div>
               </div>
               <p className="mt-6 max-w-[50ch] text-center text-base leading-relaxed text-pretty text-muted-ink md:text-left md:text-lg">
@@ -173,6 +176,9 @@ function Home() {
                     width={960}
                     height={1200}
                   />
+                  <svg className="headshot-sweep" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M 6 1 H 94 A 5 5 0 0 1 99 6 V 94 A 5 5 0 0 1 94 99 H 6 A 5 5 0 0 1 1 94 V 6 A 5 5 0 0 1 6 1 Z" />
+                  </svg>
                 </div>
                 <div className="mt-3 flex justify-between font-mono text-[10px] tracking-[0.2em] text-muted-ink">
                   <span>HEADSHOT · 6′0″</span>
