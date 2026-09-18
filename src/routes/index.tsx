@@ -166,7 +166,9 @@ function Home() {
 
           <div className="mt-10 grid items-end gap-10 md:grid-cols-12">
             <div className="animate-fade-up md:col-span-7">
-              <p className="slate-label text-center md:text-left">Character Actor · Voice-Over · Writer · Producer</p>
+              <p className="slate-label text-center md:text-left">
+                <span className="whitespace-nowrap">Character Actor</span> · <span className="whitespace-nowrap">Voice-Over</span> · <span className="whitespace-nowrap">Writer</span><span className="hidden md:inline"> · </span> <span className="whitespace-nowrap">Producer</span>
+              </p>
               <h1 className="mt-6 w-full max-w-full text-center text-[11vw] leading-[0.95] font-semibold tracking-[-0.03em] text-balance text-bone md:text-left md:text-7xl">
                 JAMES MCMANN
               </h1>
