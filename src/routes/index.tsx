@@ -222,6 +222,13 @@ function Home() {
                 >
                   Booking &amp; Representation
                 </a>
+                <a
+                  href="/james-mcmann-resume.pdf"
+                  download
+                  className="font-mono text-[11px] tracking-[0.16em] text-gold/90 transition-colors hover:text-gold"
+                >
+                  DOWNLOAD RÉSUMÉ ↓
+                </a>
               </div>
               <div className="mt-10 flex flex-wrap gap-10 border-t border-line pt-6">
                 {[
