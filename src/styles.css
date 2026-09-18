@@ -65,6 +65,12 @@
   filter: drop-shadow(0 2px 3px rgba(112, 66, 0, 0.3));
 }
 
+.mobile-nav-overlay {
+  position: fixed !important;
+  inset: 0 0 auto;
+  z-index: 50;
+}
+
 .headshot-image-frame {
   position: relative;
   isolation: isolate;

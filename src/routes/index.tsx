@@ -48,7 +48,7 @@ const nav = [
 
 function Home() {
   const [filter, setFilter] = useState<string>("All");
-  const [sortBy, setSortBy] = useState<"production" | "type" | "year">("year");
+  const [sortBy, setSortBy] = useState<"production" | "year">("year");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -57,7 +57,6 @@ function Home() {
     .filter((c) => filter === "All" || c.department === filter)
     .sort((a, b) => {
       if (sortBy === "production") return a.title.localeCompare(b.title);
-      if (sortBy === "type") return a.format.localeCompare(b.format) || a.title.localeCompare(b.title);
       return (Number.parseInt(b.year, 10) || 0) - (Number.parseInt(a.year, 10) || 0);
     });
 
@@ -71,15 +70,6 @@ function Home() {
       if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
     };
   }, []);
-
-  useEffect(() => {
-    if (!mobileNavOpen || !activeSection) return;
-    if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
-    mobileNavTimer.current = setTimeout(() => setMobileNavOpen(false), 10000);
-    return () => {
-      if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
-    };
-  }, [activeSection, mobileNavOpen]);
 
   useEffect(() => {
     const sections = nav
@@ -143,7 +133,7 @@ function Home() {
               </button>
             </div>
           </div>
-          <nav className={`${mobileNavOpen ? "fixed inset-x-0 top-0 z-50 grid bg-ink/95 px-6 py-3 shadow-lg backdrop-blur-md" : "hidden"} relative grid-cols-6 gap-1 border-t border-line pt-3 pr-14 text-center text-[10px] uppercase xl:static xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none xl:backdrop-blur-none xl:text-[11px]`}>
+          <nav className={`${mobileNavOpen ? "mobile-nav-overlay fixed inset-x-0 top-0 z-50 grid bg-ink/95 px-6 py-3 shadow-lg backdrop-blur-md" : "hidden"} relative grid-cols-6 gap-1 border-t border-line pt-3 pr-14 text-center text-[10px] uppercase xl:static xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none xl:backdrop-blur-none xl:text-[11px]`}>
             {nav.map((n) => {
               const sectionId = n.href.slice(1);
               const isActive = activeSection === sectionId;
@@ -328,19 +318,20 @@ function Home() {
                   {d}
                 </button>
               ))}
-              <label className="ml-1 flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-muted-ink">
-                <span>Sort</span>
-                <select
-                  value={sortBy}
-                  onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
-                  className="bg-transparent text-gold outline-none"
-                  aria-label="Sort credits"
-                >
-                  <option value="year">Year</option>
-                  <option value="production">Production</option>
-                  <option value="type">Type</option>
-                </select>
-              </label>
+              {filter === "All" && (
+                <label className="ml-1 flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-muted-ink">
+                  <span>Sort</span>
+                  <select
+                    value={sortBy}
+                    onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
+                    className="bg-transparent text-gold outline-none"
+                    aria-label="Sort credits"
+                  >
+                    <option value="year">Year</option>
+                    <option value="production">Production</option>
+                  </select>
+                </label>
+              )}
             </div>
           </div>
 
