@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Clapperboard, X } from "lucide-react";
 
 import headshot from "@/assets/headshot.jpg";
@@ -50,7 +50,19 @@ function Home() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const mobileNavTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const shown = credits.filter((c) => filter === "All" || c.department === filter);
+
+  const scheduleMobileNavClose = () => {
+    if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
+    mobileNavTimer.current = setTimeout(() => setMobileNavOpen(false), 10000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     const sections = nav
@@ -123,6 +135,7 @@ function Home() {
                   key={n.href}
                   href={n.href}
                   aria-current={isActive ? "location" : undefined}
+                  onClick={scheduleMobileNavClose}
                   className={`rounded px-1 py-2 transition-colors hover:text-gold ${isActive ? "bg-gold/15 text-gold" : ""}`}
                 >
                   {n.label}
