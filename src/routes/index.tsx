@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Clapperboard, X } from "lucide-react";
 
 import headshot from "@/assets/headshot.jpg";
 import p1 from "@/assets/p1.jpg";
@@ -47,6 +48,7 @@ const nav = [
 function Home() {
   const [filter, setFilter] = useState<string>("All");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const shown = credits.filter((c) => filter === "All" || c.department === filter);
 
   useEffect(() => {
@@ -73,33 +75,49 @@ function Home() {
   return (
     <main className="bg-ink text-bone">
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-line bg-[radial-gradient(circle_at_78%_24%,rgba(211,174,101,0.12),transparent_30%),radial-gradient(circle_at_12%_80%,rgba(255,255,255,0.03),transparent_28%)]">
+      <section className="hero-atmosphere relative overflow-hidden border-b border-line">
         <div className="pointer-events-none absolute -right-32 top-24 size-80 rounded-full bg-gold/5 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 pt-6 pb-14 md:px-10">
-          <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-muted-ink">
+          <div className="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-[0.28em] text-muted-ink">
             <span>James R. McMann</span>
-            <nav className="grid w-full grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] md:flex md:w-auto md:gap-6 md:border-0 md:pt-0 md:text-[11px]">
-              {nav.map((n) => (
-                <a key={n.href} href={n.href} className="transition-colors hover:text-gold">
-                  {n.label}
-                </a>
-              ))}
-            </nav>
-            <span>IMDb nm2282094</span>
+            <div className="flex items-center gap-4">
+              <span className="hidden sm:inline">IMDb nm2282094</span>
+              <button
+                type="button"
+                className="grid size-10 place-items-center rounded-lg border border-line text-gold transition-colors hover:border-gold md:hidden"
+                onClick={() => setMobileNavOpen((open) => !open)}
+                aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
+                aria-expanded={mobileNavOpen}
+              >
+                {mobileNavOpen ? <X size={19} /> : <Clapperboard size={19} />}
+              </button>
+            </div>
           </div>
+          <nav className={`${mobileNavOpen ? "grid" : "hidden"} mt-5 grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase md:mt-0 md:flex md:w-auto md:gap-6 md:border-0 md:pt-0 md:text-[11px]`}>
+            {nav.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                onClick={() => setMobileNavOpen(false)}
+                className="transition-colors hover:text-gold"
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
 
           <div className="mt-10 grid items-end gap-10 md:grid-cols-12">
             <div className="animate-fade-up md:col-span-7">
-              <p className="slate-label">Character Actor · Voice-Over · Writer · Producer</p>
+              <p className="slate-label text-center md:text-left">Character Actor · Voice-Over · Writer · Producer</p>
               <h1 className="mt-6 w-full max-w-full text-center text-[11vw] leading-[0.95] font-semibold tracking-[-0.03em] text-balance text-bone md:text-left md:text-7xl">
                 JAMES MCMANN
               </h1>
-              <p className="mt-6 max-w-[50ch] text-base leading-relaxed text-pretty text-muted-ink md:text-lg">
+              <p className="mt-6 max-w-[50ch] text-center text-base leading-relaxed text-pretty text-muted-ink md:text-left md:text-lg">
                 Southeast Texas by way of the Kenyan Rift Valley. Behind the microphone since 1984,
                 on the mark since 2004 — over 100 television shows and features, plus a producer's
                 and writer's eye behind the camera.
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-6">
+              <div className="mt-9 flex flex-wrap items-center justify-center gap-6 md:justify-start">
                 <a
                   href="#credits"
                   className="inline-flex items-center gap-3 rounded-lg bg-gold px-5 py-3 text-sm font-medium text-ink shadow-[0_10px_30px_rgba(211,174,101,0.18)] ring-1 ring-gold transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(211,174,101,0.28)]"
