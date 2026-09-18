@@ -489,9 +489,9 @@ function Home() {
               <a
                 href="/james-mcmann-resume.pdf"
                 download
-                className="mt-3 block font-mono text-[11px] tracking-[0.2em] text-muted-ink hover:text-gold"
+                className="mt-5 inline-flex items-center rounded-lg border border-gold/50 bg-gold/10 px-4 py-3 font-mono text-sm tracking-[0.16em] text-gold transition-all hover:border-gold hover:bg-gold/20"
               >
-                DOWNLOAD RESUME PDF ↓
+                DOWNLOAD FULL RESUME PDF ↓
               </a>
               <p className="mt-8 font-mono text-lg font-normal uppercase tracking-[0.18em] text-gold/90 md:text-xl">
                 James R. McMann
