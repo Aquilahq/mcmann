@@ -84,7 +84,7 @@ function Home() {
               <span className="hidden sm:inline">IMDb nm2282094</span>
               <button
                 type="button"
-                className="grid size-10 place-items-center rounded-lg border border-line text-gold transition-colors hover:border-gold md:hidden"
+                className="grid size-10 place-items-center rounded-lg border border-line text-gold transition-colors hover:border-gold xl:hidden"
                 onClick={() => setMobileNavOpen((open) => !open)}
                 aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
                 aria-expanded={mobileNavOpen}
@@ -93,7 +93,7 @@ function Home() {
               </button>
             </div>
           </div>
-          <nav className={`${mobileNavOpen ? "grid" : "hidden"} mt-5 grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase md:mt-0 md:flex md:w-auto md:gap-6 md:border-0 md:pt-0 md:text-[11px]`}>
+          <nav className={`${mobileNavOpen ? "grid" : "hidden"} mt-5 grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:pt-0 xl:text-[11px]`}>
             {nav.map((n) => (
               <a
                 key={n.href}
