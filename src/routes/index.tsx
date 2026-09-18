@@ -48,7 +48,7 @@ const nav = [
 
 function Home() {
   const [filter, setFilter] = useState<string>("All");
-  const [sortBy, setSortBy] = useState<"production" | "year">("year");
+  const [sortBy, setSortBy] = useState<"production" | "type" | "year">("year");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -57,6 +57,7 @@ function Home() {
     .filter((c) => filter === "All" || c.department === filter)
     .sort((a, b) => {
       if (sortBy === "production") return a.title.localeCompare(b.title);
+      if (sortBy === "type") return a.format.localeCompare(b.format) || a.title.localeCompare(b.title);
       return (Number.parseInt(b.year, 10) || 0) - (Number.parseInt(a.year, 10) || 0);
     });
 
@@ -337,6 +338,7 @@ function Home() {
                   >
                     <option value="year">Year</option>
                     <option value="production">Production</option>
+                    <option value="type">Type</option>
                   </select>
                 </label>
               )}
