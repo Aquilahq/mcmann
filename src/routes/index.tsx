@@ -48,11 +48,18 @@ const nav = [
 
 function Home() {
   const [filter, setFilter] = useState<string>("All");
+  const [sortBy, setSortBy] = useState<"production" | "type" | "year">("year");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const mobileNavTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shown = credits.filter((c) => filter === "All" || c.department === filter);
+  const shown = [...credits]
+    .filter((c) => filter === "All" || c.department === filter)
+    .sort((a, b) => {
+      if (sortBy === "production") return a.title.localeCompare(b.title);
+      if (sortBy === "type") return a.format.localeCompare(b.format) || a.title.localeCompare(b.title);
+      return (Number.parseInt(b.year, 10) || 0) - (Number.parseInt(a.year, 10) || 0);
+    });
 
   const scheduleMobileNavClose = () => {
     if (mobileNavTimer.current) clearTimeout(mobileNavTimer.current);
@@ -306,7 +313,7 @@ function Home() {
                 Credits
               </h2>
             </div>
-            <div className="flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.15em]">
+            <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.15em]">
               {departments.map((d) => (
                 <button
                   key={d}
@@ -320,6 +327,19 @@ function Home() {
                   {d}
                 </button>
               ))}
+              <label className="ml-1 flex items-center gap-2 rounded-lg border border-line px-3 py-1.5 text-muted-ink">
+                <span>Sort</span>
+                <select
+                  value={sortBy}
+                  onChange={(event) => setSortBy(event.target.value as typeof sortBy)}
+                  className="bg-transparent text-gold outline-none"
+                  aria-label="Sort credits"
+                >
+                  <option value="year">Year</option>
+                  <option value="production">Production</option>
+                  <option value="type">Type</option>
+                </select>
+              </label>
             </div>
           </div>
 
