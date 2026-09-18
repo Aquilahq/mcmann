@@ -122,6 +122,14 @@ function Home() {
                     height={1200}
                   />
                   <svg className="headshot-sweep" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="gold-sweep" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stopColor="#fff6ad" />
+                        <stop offset="0.35" stopColor="#ffd447" />
+                        <stop offset="0.7" stopColor="#d99616" />
+                        <stop offset="1" stopColor="#fff1a0" />
+                      </linearGradient>
+                    </defs>
                     <path d="M 6 1 H 94 A 5 5 0 0 1 99 6 V 94 A 5 5 0 0 1 94 99 H 6 A 5 5 0 0 1 1 94 V 6 A 5 5 0 0 1 6 1 Z" />
                   </svg>
                 </div>
@@ -177,8 +185,16 @@ function Home() {
                     height={1200}
                   />
                   <svg className="headshot-sweep" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                    <path d="M 6 1 H 94 A 5 5 0 0 1 99 6 V 94 A 5 5 0 0 1 94 99 H 6 A 5 5 0 0 1 1 94 V 6 A 5 5 0 0 1 6 1 Z" />
-                  </svg>
+                  <defs>
+                    <linearGradient id="gold-sweep-desktop" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stopColor="#fff6ad" />
+                      <stop offset="0.35" stopColor="#ffd447" />
+                      <stop offset="0.7" stopColor="#d99616" />
+                      <stop offset="1" stopColor="#fff1a0" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 6 1 H 94 A 5 5 0 0 1 99 6 V 94 A 5 5 0 0 1 94 99 H 6 A 5 5 0 0 1 1 94 V 6 A 5 5 0 0 1 6 1 Z" />
+                </svg>
                 </div>
                 <div className="mt-3 flex justify-between font-mono text-[10px] tracking-[0.2em] text-muted-ink">
                   <span>HEADSHOT · 6′0″</span>
