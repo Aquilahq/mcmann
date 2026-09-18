@@ -493,7 +493,7 @@ function Home() {
               >
                 DOWNLOAD RESUME PDF ↓
               </a>
-              <p className="mt-8 font-signature text-5xl text-gold/95">James R. McMann</p>
+              <p className="signature-mark mt-8">James R. McMann</p>
               <p className="mt-1 font-mono text-[10px] tracking-[0.2em] text-muted-ink">AVAILABLE FOR THE NEXT TAKE</p>
             </div>
             <form
