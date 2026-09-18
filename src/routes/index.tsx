@@ -91,8 +91,8 @@ function Home() {
           <div className="mt-10 grid items-end gap-10 md:grid-cols-12">
             <div className="animate-fade-up md:col-span-7">
               <p className="slate-label">Character Actor · Voice-Over · Writer · Producer</p>
-              <h1 className="mt-6 text-[13vw] leading-[0.92] font-semibold tracking-tight text-balance text-bone md:text-7xl">
-                JAMES&nbsp;MCMANN
+              <h1 className="mt-6 w-full max-w-full text-center text-[11vw] leading-[0.95] font-semibold tracking-[-0.03em] text-balance text-bone md:text-left md:text-7xl">
+                JAMES MCMANN
               </h1>
               <p className="mt-6 max-w-[50ch] text-base leading-relaxed text-pretty text-muted-ink md:text-lg">
                 Southeast Texas by way of the Kenyan Rift Valley. Behind the microphone since 1984,
