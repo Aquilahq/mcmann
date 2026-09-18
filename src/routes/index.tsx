@@ -114,7 +114,7 @@ function Home() {
               </button>
             </div>
           </div>
-          <nav className={`${mobileNavOpen ? "grid sticky top-0 z-40 bg-ink/95 backdrop-blur-md" : "hidden"} mt-5 grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:bg-transparent xl:pt-0 xl:backdrop-blur-none xl:static xl:text-[11px]`}>
+          <nav className={`${mobileNavOpen ? "fixed inset-x-0 top-0 z-50 grid bg-ink/95 px-6 py-3 shadow-lg backdrop-blur-md" : "hidden"} grid-cols-5 gap-1 border-t border-line pt-3 text-center text-[10px] uppercase xl:static xl:mt-0 xl:flex xl:w-auto xl:gap-6 xl:border-0 xl:bg-transparent xl:p-0 xl:shadow-none xl:backdrop-blur-none xl:text-[11px]`}>
             {nav.map((n) => {
               const sectionId = n.href.slice(1);
               const isActive = activeSection === sectionId;
